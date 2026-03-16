@@ -1,0 +1,7 @@
+{
+  "name": "Velo Trading",
+  "description": "A zero-fee crypto copy-trading platform designed for beginners to follow experts and grow their wealth effortlessly.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
