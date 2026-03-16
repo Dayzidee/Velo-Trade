@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #09090b;
+  color: #fafafa;
+}
+
+.velo-gradient {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 50%, #06b6d4 100%);
+}
+
+.velo-text-gradient {
+  background: linear-gradient(135deg, #a78bfa 0%, #818cf8 50%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.velo-border-gradient {
+  border-image: linear-gradient(135deg, #7c3aed, #06b6d4) 1;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}

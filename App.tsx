@@ -67,7 +67,7 @@ const App: React.FC = () => {
         )}
 
         {currentView === 'faq' && (
-          <FAQ navigateTo={navigateTo} />
+          <FAQ />
         )}
 
         {currentView === 'terms' && (

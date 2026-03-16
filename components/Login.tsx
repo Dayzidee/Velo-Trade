@@ -20,7 +20,7 @@ const Login: React.FC<LoginProps> = ({ navigateTo }) => {
   return (
     <div className="min-h-screen pt-32 pb-20 px-4 flex flex-col items-center justify-center relative overflow-hidden">
       <div className="w-full max-w-md z-10">
-        <div className="bg-zinc-900/50 backdrop-blur-2xl border border-zinc-800 rounded-3xl p-8 md:p-10 shadow-2xl">
+        <div className="bg-zinc-900/40 backdrop-blur-3xl border border-zinc-800/80 rounded-3xl p-8 md:p-10 shadow-[0_0_50px_rgba(124,58,237,0.05)]">
           <div className="text-center mb-10">
             <h2 className="text-4xl font-black text-white mb-2 uppercase tracking-tighter">Welcome Back</h2>
             <p className="text-zinc-500 font-medium">Log in to your Velo account to continue trading.</p>
@@ -32,7 +32,7 @@ const Login: React.FC<LoginProps> = ({ navigateTo }) => {
               <input 
                 type="text" 
                 placeholder="Enter your identifier"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
+                className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all shadow-inner"
                 value={formData.identifier}
                 onChange={(e) => setFormData({...formData, identifier: e.target.value})}
               />
@@ -46,7 +46,7 @@ const Login: React.FC<LoginProps> = ({ navigateTo }) => {
               <input 
                 type="password" 
                 placeholder="••••••••"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
+                className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all shadow-inner"
                 value={formData.password}
                 onChange={(e) => setFormData({...formData, password: e.target.value})}
               />
@@ -54,7 +54,7 @@ const Login: React.FC<LoginProps> = ({ navigateTo }) => {
 
             <button 
               type="submit"
-              className="w-full velo-gradient py-4 rounded-xl text-lg font-black text-white shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all uppercase tracking-widest mt-4"
+              className="w-full velo-gradient py-4 rounded-xl text-lg font-black text-white shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all uppercase tracking-widest mt-4 border border-white/10"
             >
               Log In
             </button>

@@ -1,12 +1,6 @@
-
 import React, { useState } from 'react';
-import { View } from '../App';
 
-interface FAQProps {
-  navigateTo: (view: View) => void;
-}
-
-const FAQ: React.FC<FAQProps> = ({ navigateTo }) => {
+const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const faqs = [

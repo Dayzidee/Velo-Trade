@@ -80,7 +80,7 @@ const Hero: React.FC<HeroProps> = ({ navigateTo }) => {
             </button>
             <button 
               onClick={() => navigateTo('trading')}
-              className="w-full sm:w-auto px-10 py-5 bg-zinc-900 border border-zinc-800 rounded-2xl text-lg font-black text-zinc-300 hover:text-white hover:bg-zinc-800 transition-all text-center uppercase tracking-widest"
+              className="w-full sm:w-auto px-10 py-5 bg-zinc-900/50 backdrop-blur-md border border-zinc-800 rounded-2xl text-lg font-black text-zinc-300 hover:text-white hover:bg-zinc-800/80 transition-all text-center uppercase tracking-widest shadow-xl"
             >
               Try Free Demo
             </button>

@@ -82,13 +82,13 @@ const Header: React.FC<HeaderProps> = ({ isScrolled, navigateTo, currentView }) 
         <div className="flex items-center gap-3 z-10">
           <button 
             onClick={() => navigateTo('login')}
-            className={`hidden sm:block text-[10px] font-black px-4 py-2 transition-colors uppercase tracking-[0.2em] ${currentView === 'login' ? 'text-white' : 'text-zinc-500 hover:text-white'}`}
+            className="hidden sm:block text-[10px] font-black px-4 py-2 transition-colors uppercase tracking-widest ${currentView === 'login' ? 'text-white' : 'text-zinc-500 hover:text-white'}"
           >
             Login
           </button>
           <button 
             onClick={() => navigateTo('register')}
-            className="velo-gradient px-6 py-2.5 rounded-full text-[10px] font-black text-white shadow-lg shadow-indigo-500/10 hover:shadow-indigo-500/30 hover:scale-105 active:scale-95 transition-all uppercase tracking-widest border border-white/10"
+            className="velo-gradient px-6 py-2.5 rounded-xl text-[10px] font-black text-white shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:scale-105 active:scale-95 transition-all uppercase tracking-widest border border-white/10"
           >
             Join
           </button>

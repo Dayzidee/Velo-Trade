@@ -22,7 +22,7 @@ const Register: React.FC<RegisterProps> = ({ navigateTo }) => {
   return (
     <div className="min-h-screen pt-32 pb-20 px-4 flex flex-col items-center justify-center relative overflow-hidden">
       <div className="w-full max-w-xl z-10">
-        <div className="bg-zinc-900/50 backdrop-blur-2xl border border-zinc-800 rounded-3xl p-8 md:p-12 shadow-2xl">
+        <div className="bg-zinc-900/40 backdrop-blur-3xl border border-zinc-800/80 rounded-3xl p-8 md:p-12 shadow-[0_0_50px_rgba(124,58,237,0.05)]">
           <div className="text-center mb-10">
             <h2 className="text-4xl font-black text-white mb-2 uppercase tracking-tighter">Join Velo</h2>
             <p className="text-zinc-500 font-medium">Start your free copy-trading journey in minutes.</p>
@@ -34,7 +34,7 @@ const Register: React.FC<RegisterProps> = ({ navigateTo }) => {
               <input 
                 type="text" 
                 placeholder="John Doe"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
+                className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all shadow-inner"
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
               />
@@ -45,7 +45,7 @@ const Register: React.FC<RegisterProps> = ({ navigateTo }) => {
               <input 
                 type="email" 
                 placeholder="john@example.com"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
+                className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all shadow-inner"
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
               />
@@ -56,7 +56,7 @@ const Register: React.FC<RegisterProps> = ({ navigateTo }) => {
               <input 
                 type="password" 
                 placeholder="••••••••"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
+                className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all shadow-inner"
                 value={formData.password}
                 onChange={(e) => setFormData({...formData, password: e.target.value})}
               />
@@ -67,7 +67,7 @@ const Register: React.FC<RegisterProps> = ({ navigateTo }) => {
               <input 
                 type="password" 
                 placeholder="••••••••"
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
+                className="w-full bg-zinc-950/50 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder:text-zinc-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all shadow-inner"
                 value={formData.confirmPassword}
                 onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
               />
@@ -87,7 +87,7 @@ const Register: React.FC<RegisterProps> = ({ navigateTo }) => {
 
               <button 
                 type="submit"
-                className="w-full velo-gradient py-5 rounded-2xl text-xl font-black text-white shadow-2xl shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-[1.01] active:scale-[0.99] transition-all uppercase tracking-widest"
+                className="w-full velo-gradient py-5 rounded-xl text-xl font-black text-white shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all uppercase tracking-widest border border-white/10"
               >
                 Create Account
               </button>
