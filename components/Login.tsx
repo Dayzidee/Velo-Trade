@@ -1,7 +1,11 @@
-
 import React, { useState } from 'react';
 import { View } from '../App';
-
+import { auth } from '../lib/firebase';
+import { 
+  signInWithEmailAndPassword, 
+  GoogleAuthProvider, 
+  signInWithPopup 
+} from 'firebase/auth';
 interface LoginProps {
   navigateTo: (view: View) => void;
 }
@@ -11,12 +15,34 @@ const Login: React.FC<LoginProps> = ({ navigateTo }) => {
     identifier: '',
     password: ''
   });
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Logging in...', formData);
+    setError('');
+    setIsSubmitting(true);
+
+    try {
+      await signInWithEmailAndPassword(auth, formData.identifier, formData.password);
+      navigateTo('trading');
+    } catch (err: any) {
+      setError(err.message || 'Failed to login');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
+  const handleGoogleLogin = async () => {
+    setError('');
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      navigateTo('trading');
+    } catch (err: any) {
+      setError(err.message || 'Google login failed');
+    }
+  };
   return (
     <div className="min-h-screen pt-32 pb-20 px-4 flex flex-col items-center justify-center relative overflow-hidden">
       <div className="w-full max-w-md z-10">
@@ -24,6 +50,11 @@ const Login: React.FC<LoginProps> = ({ navigateTo }) => {
           <div className="text-center mb-10">
             <h2 className="text-4xl font-black text-white mb-2 uppercase tracking-tighter">Welcome Back</h2>
             <p className="text-zinc-500 font-medium">Log in to your Velo account to continue trading.</p>
+            {error && (
+              <div className="mt-4 p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs font-bold">
+                {error}
+              </div>
+            )}
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -54,9 +85,10 @@ const Login: React.FC<LoginProps> = ({ navigateTo }) => {
 
             <button 
               type="submit"
-              className="w-full velo-gradient py-4 rounded-xl text-lg font-black text-white shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all uppercase tracking-widest mt-4 border border-white/10"
+              disabled={isSubmitting}
+              className={`w-full velo-gradient py-4 rounded-xl text-lg font-black text-white shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all uppercase tracking-widest mt-4 border border-white/10 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
-              Log In
+              {isSubmitting ? 'Verifying...' : 'Log In'}
             </button>
           </form>
 
@@ -77,7 +109,10 @@ const Login: React.FC<LoginProps> = ({ navigateTo }) => {
         <div className="mt-8 flex flex-col items-center gap-4">
           <p className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.2em]">Or continue with</p>
           <div className="flex gap-4">
-            <button className="w-12 h-12 bg-zinc-900 border border-zinc-800 rounded-xl flex items-center justify-center hover:bg-zinc-800 transition-colors">
+            <button 
+              onClick={handleGoogleLogin}
+              className="w-12 h-12 bg-zinc-900 border border-zinc-800 rounded-xl flex items-center justify-center hover:bg-zinc-800 transition-colors"
+            >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.908 3.152-1.896 4.076-1.228 1.216-3.144 2.388-6.744 2.388-5.728 0-10.2-4.632-10.2-10.38s4.472-10.38 10.2-10.38c3.088 0 5.304 1.184 7.004 2.76l2.304-2.304C18.42 1.488 15.696 0 12.48 0 5.856 0 0 5.376 0 12s5.856 12 12.48 12c3.552 0 6.456-1.128 8.916-3.708 2.532-2.532 3.336-6.144 3.336-9.084 0-.84-.072-1.632-.204-2.352H12.48z"/>
               </svg>

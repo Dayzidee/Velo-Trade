@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { TickerData } from '../../hooks/useBinanceData';
+import { TickerData } from '../../hooks/useMarketData';
 import OrderBook from './OrderBook';
 
 interface RightPanelProps {
   ticker: TickerData;
+  symbol: string;
   isOpen: boolean;
   onToggle: () => void;
 }
 
-const RightPanel: React.FC<RightPanelProps> = ({ ticker, isOpen, onToggle }) => {
+const RightPanel: React.FC<RightPanelProps> = ({ ticker, symbol, isOpen, onToggle }) => {
   const [activeTab, setActiveTab] = useState<'info' | 'orders'>('orders');
   const priceUp = ticker.priceChangePercent24h >= 0;
 
@@ -102,9 +103,9 @@ const RightPanel: React.FC<RightPanelProps> = ({ ticker, isOpen, onToggle }) => 
 
               {/* Market Description placeholder */}
               <div className="flex-1 overflow-y-auto p-6 flex flex-col text-left">
-                <h4 className="text-white font-black uppercase tracking-widest text-[10px] mb-3 italic">About {ticker.symbol}</h4>
+                <h4 className="text-white font-black uppercase tracking-widest text-[10px] mb-3 italic">About {symbol}</h4>
                 <p className="text-zinc-500 text-[10px] font-medium leading-relaxed">
-                  {ticker.symbol} is a prominent digital asset in the global financial ecosystem. Market participants monitor price action closely for volatility and liquidity patterns.
+                  {symbol} is a prominent digital asset in the global financial ecosystem. Market participants monitor price action closely for volatility and liquidity patterns.
                 </p>
                 
                 <div className="mt-8 space-y-4">

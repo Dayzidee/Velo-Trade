@@ -22,10 +22,11 @@ const MOCK_TRANSACTIONS: Transaction[] = [
 
 interface WalletDashboardProps {
   onBack: () => void;
+  initialTab?: WalletTab;
 }
 
-const WalletDashboard: React.FC<WalletDashboardProps> = ({ onBack }) => {
-  const [activeTab, setActiveTab] = useState<WalletTab>('overview');
+const WalletDashboard: React.FC<WalletDashboardProps> = ({ onBack, initialTab = 'overview' }) => {
+  const [activeTab, setActiveTab] = useState<WalletTab>(initialTab);
   const [withdrawAddress, setWithdrawAddress] = useState('');
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [transferAmount, setTransferAmount] = useState('');

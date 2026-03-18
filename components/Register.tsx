@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { View } from '../App';
-
+import { auth } from '../lib/firebase';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 interface RegisterProps {
   navigateTo: (view: View) => void;
 }
@@ -13,12 +13,30 @@ const Register: React.FC<RegisterProps> = ({ navigateTo }) => {
     password: '',
     confirmPassword: ''
   });
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Registering...', formData);
-  };
+    setError('');
 
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      await updateProfile(userCredential.user, { displayName: formData.name });
+      navigateTo('trading');
+    } catch (err: any) {
+      setError(err.message || 'Registration failed');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="min-h-screen pt-32 pb-20 px-4 flex flex-col items-center justify-center relative overflow-hidden">
       <div className="w-full max-w-xl z-10">
@@ -26,6 +44,11 @@ const Register: React.FC<RegisterProps> = ({ navigateTo }) => {
           <div className="text-center mb-10">
             <h2 className="text-4xl font-black text-white mb-2 uppercase tracking-tighter">Join Velo</h2>
             <p className="text-zinc-500 font-medium">Start your free copy-trading journey in minutes.</p>
+            {error && (
+              <div className="mt-4 p-3 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs font-bold">
+                {error}
+              </div>
+            )}
           </div>
 
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -87,9 +110,10 @@ const Register: React.FC<RegisterProps> = ({ navigateTo }) => {
 
               <button 
                 type="submit"
-                className="w-full velo-gradient py-5 rounded-xl text-xl font-black text-white shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all uppercase tracking-widest border border-white/10"
+                disabled={isSubmitting}
+                className={`w-full velo-gradient py-5 rounded-xl text-xl font-black text-white shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all uppercase tracking-widest border border-white/10 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                Create Account
+                {isSubmitting ? 'Creating...' : 'Create Account'}
               </button>
             </div>
           </form>

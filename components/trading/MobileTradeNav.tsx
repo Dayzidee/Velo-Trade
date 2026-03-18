@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type MobileTab = 'chart' | 'trade' | 'positions' | 'more';
+export type MobileTab = 'trade' | 'social' | 'positions' | 'more';
 
 interface MobileTradeNavProps {
   activeTab: MobileTab;
@@ -8,8 +8,8 @@ interface MobileTradeNavProps {
 }
 
 const tabs: { id: MobileTab; label: string; icon: string }[] = [
-  { id: 'chart', label: 'Chart', icon: '📊' },
-  { id: 'trade', label: 'Trade', icon: '💱' },
+  { id: 'trade', label: 'Trade', icon: '📊' },
+  { id: 'social', label: 'Social', icon: '👥' },
   { id: 'positions', label: 'Positions', icon: '📋' },
   { id: 'more', label: 'More', icon: '⚙️' },
 ];

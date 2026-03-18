@@ -17,12 +17,24 @@ import Terms from './components/Terms';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Regulation from './components/Regulation';
 import Trading from './components/Trading';
+import AdminPortal from './components/admin/AdminPortal';
+import { useAuth } from './context/AuthContext';
 
-export type View = 'home' | 'login' | 'register' | 'faq' | 'terms' | 'privacy' | 'regulation' | 'trading';
+export type View = 'home' | 'login' | 'register' | 'faq' | 'terms' | 'privacy' | 'regulation' | 'trading' | 'admin';
 
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentView, setCurrentView] = useState<View>('home');
+  const { user, isAdmin, loading } = useAuth();
+
+  // Route Protection for Admin View
+  useEffect(() => {
+    if (currentView === 'admin' && !loading) {
+      if (!user || !isAdmin) {
+        setCurrentView('home');
+      }
+    }
+  }, [currentView, user, isAdmin, loading]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,8 +51,8 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-50 overflow-x-hidden scroll-smooth">
-      {/* Dynamic Header - Hidden when in trading mode for full immersion */}
-      {currentView !== 'trading' && (
+      {/* Dynamic Header - Hidden when in trading/admin mode for full immersion */}
+      {currentView !== 'trading' && currentView !== 'admin' && (
         <Header isScrolled={isScrolled} navigateTo={navigateTo} currentView={currentView} />
       )}
       
@@ -85,9 +97,13 @@ const App: React.FC = () => {
         {currentView === 'trading' && (
           <Trading navigateTo={navigateTo} />
         )}
+
+        {currentView === 'admin' && isAdmin && (
+          <AdminPortal navigateTo={navigateTo} />
+        )}
         
-        {/* Background Decorative Elements - Only for non-trading views */}
-        {currentView !== 'trading' && (
+        {/* Background Decorative Elements - Only for landing views */}
+        {currentView !== 'trading' && currentView !== 'admin' && (
           <>
             <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
             <div className="fixed bottom-0 right-0 w-[500px] h-[500px] bg-cyan-600/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
@@ -95,8 +111,8 @@ const App: React.FC = () => {
         )}
       </main>
 
-      {/* Global Footer - Hidden in trading mode */}
-      {currentView !== 'trading' && (
+      {/* Global Footer - Hidden in trading/admin mode */}
+      {currentView !== 'trading' && currentView !== 'admin' && (
         <Footer navigateTo={navigateTo} />
       )}
     </div>
